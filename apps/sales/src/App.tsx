@@ -1,4 +1,5 @@
 import {useReducer} from 'preact/hooks';
+import { Suspense, lazy } from 'preact/compat';
 
 import { Logo } from './logo';
 import styles from './App.module.css';
@@ -8,6 +9,7 @@ import {CountView, Incrementer, Decrementer, ColorView} from '@spacely/inventory
 import { InventoryContext, reducer } from '@spacely/inventory';
 
 const ShoppingCart = () => {
+  
   const [state,dispatch] = useReducer(reducer, {
     count:0,
     color:'#000'
