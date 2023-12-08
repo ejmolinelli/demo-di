@@ -14,7 +14,10 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "@spacely/inventory": ["packages/inventory/src/index.ts"],
+      "@spacely/inventoryviews": ["packages/inventory-views/src/index.ts"]
+    }
   },
   "exclude": ["node_modules", "tmp"]
 }
