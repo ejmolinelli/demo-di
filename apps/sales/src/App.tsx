@@ -1,6 +1,30 @@
+import {useReducer} from 'preact/hooks';
+
 import { Logo } from './logo';
 import styles from './App.module.css';
-import {DummyView} from '@spacely/inventoryviews'
+
+
+import {CountView, Incrementer, Decrementer, ColorView} from '@spacely/inventoryviews'
+import { InventoryContext, reducer } from '@spacely/inventory';
+
+const ShoppingCart = () => {
+  const [state,dispatch] = useReducer(reducer, {
+    count:0,
+    color:'#000'
+  });
+
+  return (
+    <div>
+      <InventoryContext.Provider value={{state, dispatch}}>
+        <CountView />
+        <CountView />
+        <Decrementer /><Incrementer/>
+        <br />
+        <ColorView />
+      </InventoryContext.Provider>
+    </div>
+  )
+}
 
 function App() {
   return (
@@ -20,8 +44,8 @@ function App() {
         </a>
       </header>
       <div>
-        <h1> Custom content</h1>
-        <DummyView />
+        <h1> Shopping Cart</h1>
+        <ShoppingCart />
       </div>
     </div>
   );
