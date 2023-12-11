@@ -5,6 +5,7 @@ import {render} from 'preact'
 import {CountView, Decrementer, ColorView} from '@spacely/inventoryviews'
 import { Inventory } from '@spacely/inventory';
 
+import Sprocket from 'JetsonsApp/Sprocket'
 
 const ShoppingCart = () => {
   const myRef = useRef();
@@ -20,6 +21,12 @@ const ShoppingCart = () => {
     }, 1500);
   },[]);
 
+  // useEffect(()=>{
+  //   import("http://localhost:3000/assets/remoteEntry.js").then((x)=>{
+  //     console.log(x);
+  //   })
+  // },[])
+
   return (
     <div>
       <CountView {...state}/>
@@ -31,6 +38,7 @@ const ShoppingCart = () => {
       <br />
       <ColorView {...state} />
       <br />
+      <Sprocket {...state} />
     </div>
   )
 }

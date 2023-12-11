@@ -15,10 +15,10 @@ export const reducer = (state:Inventory, action: InventoryAction):Inventory =>{
           break;
         }
         case "set_color": {
-
+          const a = action as PARAM_ACTION;
           return {
             ...state,
-            color: action.payload.startsWith("#") ? action.payload : state.color,
+            color: a.payload.startsWith("#") ? a.payload : state.color,
           };
           break;
         }
