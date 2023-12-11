@@ -1,4 +1,3 @@
-import { Logo } from './logo';
 import styles from './App.module.css';
 import {useDeepSignal} from 'deepsignal'
 
@@ -10,14 +9,16 @@ const ShoppingCart = () => {
   
   const MyInventory = useDeepSignal<Inventory>({count:0, color:"#F00"});
 
+
+
+  const state = {store:MyInventory};
   return (
     <div>
-      <CountView store={MyInventory}/>
-      <CountView store={MyInventory} />
-      <Decrementer store={MyInventory} /><Incrementer store={MyInventory}/>
+      <CountView {...state}/>
+      <CountView {...state} />
+      <Decrementer {...state} /><Incrementer {...state}/>
       <br />
-      <ColorView store={MyInventory} />
-
+      <ColorView {...state} />
       <br />
     </div>
   )
@@ -26,30 +27,19 @@ const ShoppingCart = () => {
 function App() {
   return (
     <div class={styles.App}>
-      <header class={styles.header}>
-        <Logo class={styles.logo} />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          class={styles.link}
-          href="https://github.com/preactjs/preact"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn Preact
-        </a>
-      </header>
+      <p>This application can display the results of one or  more inventory stores of "sprockets". Sprocket stores track only the number and color of sprockets. </p>
       <div>
-        <h1> Shopping Cart</h1>
+        <h1> This is one shopping cart</h1>
         <ShoppingCart />
       </div>
+      <br />
+      <div>
+        <h1> This is a different shopping cart</h1>
+        <ShoppingCart />
+      </div>
+      
     </div>
   );
 }
 
 export default App;
-function useDeepSignals<T>(arg0: { coun: any; }) {
-  throw new Error('Function not implemented.');
-}
-
