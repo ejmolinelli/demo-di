@@ -1,22 +1,33 @@
 import styles from './App.module.css';
 import {useDeepSignal} from 'deepsignal'
-
-import {CountView, Incrementer, Decrementer, ColorView} from '@spacely/inventoryviews'
+import {useEffect, useRef} from 'preact/hooks'
+import {render} from 'preact'
+import {CountView, Decrementer, ColorView} from '@spacely/inventoryviews'
 import { Inventory } from '@spacely/inventory';
 
 
 const ShoppingCart = () => {
-  
+  const myRef = useRef();
   const MyInventory = useDeepSignal<Inventory>({count:0, color:"#F00"});
-
-
-
   const state = {store:MyInventory};
+
+  useEffect(()=>{
+    setTimeout(() => {
+      import('./wrapper').then((module)=>{
+        const Inc = module.default;
+        render(<Inc {...state} />, myRef.current);
+      });
+    }, 1500);
+  },[]);
+
   return (
     <div>
       <CountView {...state}/>
       <CountView {...state} />
-      <Decrementer {...state} /><Incrementer {...state}/>
+      <Decrementer {...state} />
+
+      <div ref={myRef}></div>
+      
       <br />
       <ColorView {...state} />
       <br />
