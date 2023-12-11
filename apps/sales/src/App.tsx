@@ -1,29 +1,24 @@
-import {useReducer} from 'preact/hooks';
-import { Suspense, lazy } from 'preact/compat';
-
 import { Logo } from './logo';
 import styles from './App.module.css';
-
+import {useDeepSignal} from 'deepsignal'
 
 import {CountView, Incrementer, Decrementer, ColorView} from '@spacely/inventoryviews'
-import { InventoryContext, reducer } from '@spacely/inventory';
+import { Inventory } from '@spacely/inventory';
+
 
 const ShoppingCart = () => {
   
-  const [state,dispatch] = useReducer(reducer, {
-    count:0,
-    color:'#000'
-  });
+  const MyInventory = useDeepSignal<Inventory>({count:0, color:"#F00"});
 
   return (
     <div>
-      <InventoryContext.Provider value={{state, dispatch}}>
-        <CountView />
-        <CountView />
-        <Decrementer /><Incrementer/>
-        <br />
-        <ColorView />
-      </InventoryContext.Provider>
+      <CountView store={MyInventory}/>
+      <CountView store={MyInventory} />
+      <Decrementer store={MyInventory} /><Incrementer store={MyInventory}/>
+      <br />
+      <ColorView store={MyInventory} />
+
+      <br />
     </div>
   )
 }
@@ -54,3 +49,7 @@ function App() {
 }
 
 export default App;
+function useDeepSignals<T>(arg0: { coun: any; }) {
+  throw new Error('Function not implemented.');
+}
+

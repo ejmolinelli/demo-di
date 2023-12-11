@@ -4,7 +4,10 @@
   "license": "MIT",
   "scripts": {},
   "private": true,
-  "dependencies": {},
+  "dependencies": {
+    "@preact/signals": "^1.2.2",
+    "deepsignal": "^1.3.6"
+  },
   "devDependencies": {
     "@nx/cypress": "17.1.3",
     "@nx/eslint": "17.1.3",
