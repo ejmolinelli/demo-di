@@ -4,11 +4,8 @@ import {useRef} from 'preact/hooks'
 import { Inventory } from '@spacely/inventory';
 import OrderCard from './order/order';
 
-// import Simple from 'JetsonsApp/Simple';
-
 import './shoppingcart.scss'
 
-// import Sprocket from 'JetsonsApp/Sprocket'
 
 interface CartProps{
   items: Inventory[];
