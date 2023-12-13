@@ -31,20 +31,7 @@ const ShoppingCart = () => {
 function App() {
   return (
     <div class={styles.App}>
-      <header class={styles.header}>
-        <Logo class={styles.logo} />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          class={styles.link}
-          href="https://github.com/preactjs/preact"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn Preact
-        </a>
-      </header>
+
       <div>
         <h1> Shopping Cart</h1>
         <ShoppingCart />
