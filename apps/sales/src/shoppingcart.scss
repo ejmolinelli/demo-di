@@ -1,0 +1,17 @@
+.shopping-cart {
+    display: flex;
+    flex-direction: row;
+    
+    & > .order-card {
+        margin-left: 10px;
+    }
+}
+
+
+.cart-container{
+    background-color: lightgray;
+    border: 1px solid black;
+    padding: 20px;
+}
+
+.cart-1 {}

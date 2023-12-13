@@ -1,40 +1,58 @@
-import {useReducer} from 'preact/hooks';
-import { Suspense, lazy } from 'preact/compat';
-
-import { Logo } from './logo';
 import styles from './App.module.css';
+import { useDeepSignal, deepSignal } from 'deepsignal';
+import {useRef} from 'preact/hooks'
+import { Inventory } from '@spacely/inventory';
+import OrderCard from './order/order';
+
+// import Simple from 'JetsonsApp/Simple';
+
+import './shoppingcart.scss'
+
+// import Sprocket from 'JetsonsApp/Sprocket'
+
+interface CartProps{
+  items: Inventory[];
+}
+
+const ShoppingCart = (props:CartProps) => {
+  const myRef = useRef();
+
+  // wrap each inventory as a deep signal to make it reactive
+  const items = useDeepSignal<Inventory[]>(props.items.map(i=>deepSignal(i)));
 
 
-import {CountView, Incrementer, Decrementer, ColorView} from '@spacely/inventoryviews'
-import { InventoryContext, reducer } from '@spacely/inventory';
-
-const ShoppingCart = () => {
-  
-  const [state,dispatch] = useReducer(reducer, {
-    count:0,
-    color:'#000'
-  });
-
+  // map each inventory state object to an order card
   return (
-    <div>
-      <InventoryContext.Provider value={{state, dispatch}}>
-        <CountView />
-        <CountView />
-        <Decrementer /><Incrementer/>
-        <br />
-        <ColorView />
-      </InventoryContext.Provider>
+    <div class="shopping-cart">
+      {items.map((i)=><OrderCard store={i} />)}
     </div>
   )
 }
 
+
+const shipment1: Array<Inventory> = [
+  {
+    count: 10,
+    color: "#00F"
+  },
+  {
+    count: 3,
+    color: "#F00"
+  },
+  {
+    count: 7,
+    color: "#0F0"
+  }
+]
+
+
+
 function App() {
   return (
     <div class={styles.App}>
-
-      <div>
-        <h1> Shopping Cart</h1>
-        <ShoppingCart />
+      <div  class="cart-container cart-1">
+        <h3> Items for shipment 1</h3>
+        <ShoppingCart items={shipment1} />  
       </div>
     </div>
   );
