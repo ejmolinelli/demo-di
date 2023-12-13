@@ -1,60 +1,56 @@
 import styles from './App.module.css';
-import {useDeepSignal} from 'deepsignal'
-import {useEffect, useRef} from 'preact/hooks'
-import {render} from 'preact'
-import {CountView, Decrementer, ColorView} from '@spacely/inventoryviews'
+import { useDeepSignal, deepSignal } from 'deepsignal';
+import {useRef} from 'preact/hooks'
 import { Inventory } from '@spacely/inventory';
+import OrderCard from './order/order';
 
-import Sprocket from 'JetsonsApp/Sprocket'
+import './shoppingcart.scss'
 
-const ShoppingCart = () => {
+// import Sprocket from 'JetsonsApp/Sprocket'
+
+interface CartProps{
+  items: Inventory[];
+}
+
+const ShoppingCart = (props:CartProps) => {
   const myRef = useRef();
-  const MyInventory = useDeepSignal<Inventory>({count:0, color:"#F00"});
-  const state = {store:MyInventory};
 
-  useEffect(()=>{
-    setTimeout(() => {
-      import('./wrapper').then((module)=>{
-        const Inc = module.default;
-        render(<Inc {...state} />, myRef.current);
-      });
-    }, 1500);
-  },[]);
+  // wrap each inventory as a deep signal to make it reactive
+  const items = useDeepSignal<Inventory[]>(props.items.map(i=>deepSignal(i)));
 
-  // useEffect(()=>{
-  //   import("http://localhost:3000/assets/remoteEntry.js").then((x)=>{
-  //     console.log(x);
-  //   })
-  // },[])
 
+  // map each inventory state object to an order card
   return (
-    <div>
-      <CountView {...state}/>
-      <CountView {...state} />
-      <Decrementer {...state} />
-
-      <div ref={myRef}></div>
-      
-      <br />
-      <ColorView {...state} />
-      <br />
-      <Sprocket {...state} />
+    <div class="shopping-cart">
+      {items.map((i)=><OrderCard store={i} />)}
     </div>
   )
 }
 
+
+const shipment1: Array<Inventory> = [
+  {
+    count: 10,
+    color: "#000"
+  },
+  {
+    count: 3,
+    color: "#F00"
+  },
+  {
+    count: 7,
+    color: "#0F0"
+  }
+]
+
+
+
 function App() {
   return (
     <div class={styles.App}>
-      <p>This application can display the results of one or  more inventory stores of "sprockets". Sprocket stores track only the number and color of sprockets. </p>
-      <div>
-        <h1> This is one shopping cart</h1>
-        <ShoppingCart />
-      </div>
-      <br />
-      <div>
-        <h1> This is a different shopping cart</h1>
-        <ShoppingCart />
+      <div  class="cart-container cart-1">
+        <h3> Items for shipment 1</h3>
+        <ShoppingCart items={shipment1} />  
       </div>
       
     </div>

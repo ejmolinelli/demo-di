@@ -3,6 +3,7 @@ import styles from './App.module.css';
 import SprocketComponent from './sprocket';
 import { DeepSignal, useDeepSignal } from 'deepsignal';
 import { Inventory } from '../../../packages/inventory/src/lib/inventory';
+import SprocketColorPicker from './colorpicker/colorpicker';
 
 function App() {
   const JetsonsStore = useDeepSignal<Inventory>({count:10, color:"#F0F"});
@@ -10,6 +11,9 @@ function App() {
   return (
     <div class={styles.App}>
       <SprocketComponent store={JetsonsStore}/>
+
+      < br />
+      <SprocketColorPicker store={JetsonsStore} />
     </div>
   );
 }

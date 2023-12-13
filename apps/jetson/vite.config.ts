@@ -27,7 +27,8 @@ export default defineConfig({
     name: "JetsonsApp",
     filename: "remoteEntry.js",
     exposes: {
-      './Sprocket': path.resolve(__dirname, "src/sprocket.tsx")
+      './Sprocket': path.resolve(__dirname, "src/sprocket.tsx"),
+      './SprocketColor': path.resolve(__dirname,"src/colorpicker/colorpicker.tsx")
     },
     shared: []
   })],
