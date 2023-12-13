@@ -28,6 +28,7 @@ export default defineConfig({
     filename: "remoteEntry.js",
     exposes: {
       './Sprocket': path.resolve(__dirname, "src/sprocket.tsx"),
+      './Simple': path.resolve(__dirname, "src/simple.tsx"),
       './SprocketColor': path.resolve(__dirname,"src/colorpicker/colorpicker.tsx")
     },
     shared: []

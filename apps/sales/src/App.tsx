@@ -4,6 +4,8 @@ import {useRef} from 'preact/hooks'
 import { Inventory } from '@spacely/inventory';
 import OrderCard from './order/order';
 
+// import Simple from 'JetsonsApp/Simple';
+
 import './shoppingcart.scss'
 
 // import Sprocket from 'JetsonsApp/Sprocket'
@@ -31,7 +33,7 @@ const ShoppingCart = (props:CartProps) => {
 const shipment1: Array<Inventory> = [
   {
     count: 10,
-    color: "#000"
+    color: "#00F"
   },
   {
     count: 3,
@@ -52,7 +54,6 @@ function App() {
         <h3> Items for shipment 1</h3>
         <ShoppingCart items={shipment1} />  
       </div>
-      
     </div>
   );
 }

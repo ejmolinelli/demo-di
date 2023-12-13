@@ -2,10 +2,10 @@ import { Inventory } from "@spacely/inventory";
 import { Decrementer, Incrementer } from "@spacely/inventoryviews";
 import { DeepSignal } from "deepsignal";
 import './order.scss';
-import { useCallback, useState, useRef } from "preact/hooks";
-import {render} from 'preact';
+import { useState} from "preact/hooks";
 
 import SprocketColor from 'JetsonsApp/SprocketColor';
+
 
 interface OrderProps{
     store: DeepSignal<Inventory>
@@ -15,19 +15,9 @@ const OrderCard = ({store}: OrderProps)=>{
 
     console.log("Order card rendering");
 
-    const [eColor,setEColor] = useState(false);
-    const widgetRef = useRef();
+    const style = {backgroundColor:store.color};
 
-    const importColorPicker = useCallback(()=>{
-        
-        // import('http://localhost:3000/assets/remoteEntry.js').then(m=>{
-        //     console.log(m.get("SprocketColor"));
-        // })
-        render(<SprocketColor store={store} />, widgetRef.current);
-    },[])
-    
-
-    return <div class="order-card">
+    return <div class="order-card" style={style}>
         You have {<span class="count-span">{store.count}</span>} sprockets in your cart.
         <br />
         <br />
@@ -35,8 +25,8 @@ const OrderCard = ({store}: OrderProps)=>{
         < br />
         < br/>
         {/* <p>At this time, you cannot change the color of your sprocket!</p> */}
-        {!eColor && <button class="prompt-color" onClick={importColorPicker}>Click to Edit Color?</button>}
-        <div ref={widgetRef}></div>
+        {/* {!eColor && <button class="prompt-color" onClick={importColorPicker}>Click to Edit Color?</button>} */}
+        <SprocketColor store={store} />
         < br />
     </div>
 }

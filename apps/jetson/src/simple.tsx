@@ -1,11 +1,12 @@
 import { Inventory } from "@spacely/inventory"
 import { DeepSignal } from "deepsignal"
+import {useRef} from 'preact/hooks'
 
 interface PickerProps{
     store: DeepSignal<Inventory>
 }
 
-const SprocketColorPicker = ({store}:PickerProps) => {
+const Simple = ({store}:PickerProps) => {
     const registerColor = (e:InputEvent)=>{
         console.log("REGISTERING COLOR");
         if (!e || !e.target){
@@ -26,4 +27,4 @@ const SprocketColorPicker = ({store}:PickerProps) => {
     return <input type="color" name="sprocket color" value={toSeven(store.color)} onChange={registerColor}/>
 }
 
-export default SprocketColorPicker;
+export default Simple;

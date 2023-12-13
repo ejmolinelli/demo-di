@@ -8,10 +8,31 @@ interface Props{
 
 const SprocketComponent = ({store}:Props)=>{
     const style = {backgroundColor:store?.color, margin:"1rem", padding: "2rem"};
+
+
+    const registerColor = (e:InputEvent)=>{
+        console.log("REGISTERING COLOR");
+        if (!e || !e.target){
+            return;
+        }
+        // @ts-ignore
+        store.color = e.target.value;
+    }
+
+    const toSeven = (value:string) => {
+        if (value.length < 7){
+            return `#${value.split('').slice(1).map(char => char + "0").join('')}`
+        } else {
+            return value;
+        }
+    }
+
+
     return (
         <div style={style} >
-        <p>I am a totally different component, but living somewhere else, but I can be used in your app.</p>
-        <p>George Jetson produced {store?.count} {store?.$color} sprockets in spaceley's factory. </p>
+        <p>count is {store?.count} and color {store?.color} </p>
+        {/* @ts-ignore */}
+        <input type="color" name="sprocket color" value={toSeven(store?.color)} onChange={registerColor}/>
         </div>
     )
     
